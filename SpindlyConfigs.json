@@ -1,0 +1,22 @@
+{
+    "appname": "SpindlySample",
+    "driver": [
+        "webview",
+        "webapp",
+        "flutter"
+    ],
+    "devdriver": "webapp",
+    "os": [
+        "windows",
+        "linux",
+        "darwin",
+        "android",
+        "ios"
+    ],
+    "arch": [
+        "amd64",
+        "386",
+        "arm"
+    ],
+    "windowscli": true
+}
