@@ -11,16 +11,18 @@ func Main() {
 
 	println(" --- Spindly Server --- ")
 
+	// Set OnInstanciate methods before anything is instantiated
 	spindlyapp.ClockHub_OnInstanciate = StartClock
-
 	spindlyapp.ExampleHub_OnInstanciate = ExampleHub_OnInstanciate
 
+	// Configure Hubs and Server Routes
 	spindlyapp.Configure()
 
+	// You can access Hubs now
 	println(spindlyapp.Global.GetAppName())
-
 	spindlyapp.Global.SaidHello.OnChange(SaidHello)
 
+	// Start serving the UI. This will block until the server is stopped.
 	spindlyapp.Serve()
 }
 
