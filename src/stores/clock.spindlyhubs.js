@@ -1,4 +1,4 @@
-import ConnectHub from '../SpindlyHubs.js'
+import { ConnectHub } from "spindly-hubs";
 
 const hub_name = 'ClockHub';
 
