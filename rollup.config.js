@@ -71,11 +71,12 @@ export default {
 		// instead of npm run dev), minify
 		production && terser(),
 
-		SpindlyGoRun(),
-		SpindlyDev(),
+		!production && SpindlyGoRun(),
+		!production && SpindlyDev(),
 		production && SpindlyPublish()
 	],
 	watch: {
-		clearScreen: false
+		clearScreen: false,
+		exclude: ['src/**/*.spindlyhubs.js', "spindlyapp/**"]
 	}
 };

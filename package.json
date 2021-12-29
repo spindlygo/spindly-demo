@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "rollup -c && node spindly-publish.js",
-    "debug": "rollup -c -w",
-    "dev": "GORUN=1 rollup -c -w"
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
@@ -19,7 +18,7 @@
   },
   "dependencies": {
     "sirv-cli": "^1.0.0",
-    "spindly": "^1.0.14",
+    "spindly": "^1.0.16",
     "spindly-hubs": "^1.0.0"
   }
 }
