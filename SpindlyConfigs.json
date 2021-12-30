@@ -5,7 +5,7 @@
         "webapp",
         "flutter"
     ],
-    "devdriver": "webapp",
+    "devdriver": "browser",
     "os": [
         "windows",
         "linux",
