@@ -1,8 +1,6 @@
 name: Spindly Build Webview
 
-on:
-  push:
-    branches: [ master ]
+on: workflow_dispatch
 
 jobs:
 
