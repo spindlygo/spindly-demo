@@ -1,8 +1,9 @@
+
 package spindlyapp
 
 import (
+    "github.com/spindlygo/spindly/Spindly"
 	"github.com/gorilla/mux"
-	"github.com/spindlygo/spindly/Spindly"
 )
 
 var router *mux.Router
@@ -17,3 +18,4 @@ func Configure() {
 func Serve() {
 	Spindly.Serve(router, "32510")
 }
+

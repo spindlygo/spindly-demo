@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c && node ./node_modules/spindly/spindly-publish.js",
     "dev": "rollup -c -w"
   },
   "devDependencies": {
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "sirv-cli": "^1.0.0",
-    "spindly": "^1.0.17",
+    "spindly": "^1.0.18",
     "spindly-hubs": "^1.0.0"
   }
 }
