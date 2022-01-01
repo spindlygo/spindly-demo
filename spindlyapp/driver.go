@@ -17,4 +17,5 @@ func Configure() {
 
 func Serve() {
 	Spindly.Serve(router, DefaultPort)
+	Spindly.BlockWhileHostRunning()
 }
