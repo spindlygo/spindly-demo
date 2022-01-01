@@ -6,6 +6,7 @@ import (
 )
 
 var router *mux.Router
+var DefaultPort string = "32510"
 
 func Configure() {
 	InitializeHubs()
@@ -15,5 +16,5 @@ func Configure() {
 }
 
 func Serve() {
-	Spindly.Serve(router, "32510")
+	Spindly.Serve(router, DefaultPort)
 }

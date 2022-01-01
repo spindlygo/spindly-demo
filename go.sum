@@ -2,5 +2,5 @@ github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=
 github.com/gorilla/mux v1.8.0/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
 github.com/gorilla/websocket v1.4.2 h1:+/TMaTYc4QFitKJxsQ7Yye35DkWvkdLcvGKqM+x0Ufc=
 github.com/gorilla/websocket v1.4.2/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
-github.com/spindlygo/spindly v0.0.0-20211228195947-3b363de768c9 h1:KPP6QzPoaTW+StxA+NIglcMdCKXg//N07QFESAUjY98=
-github.com/spindlygo/spindly v0.0.0-20211228195947-3b363de768c9/go.mod h1:qbIxEC4pivK4ryVEs0Kuk1cXvgH54Z+zWUx050HX0S8=
+github.com/spindlygo/spindly v0.0.0-20220101091351-9a53f8ec61c3 h1:h4l1Yumpyes8nRCumskcJ7WS4K6mR2tTHm+tUaeVCMM=
+github.com/spindlygo/spindly v0.0.0-20220101091351-9a53f8ec61c3/go.mod h1:qbIxEC4pivK4ryVEs0Kuk1cXvgH54Z+zWUx050HX0S8=

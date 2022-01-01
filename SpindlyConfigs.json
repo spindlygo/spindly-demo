@@ -1,8 +1,9 @@
 {
     "appname": "SpindlySample",
     "driver": [
-        "webview",
-        "webapp",
+        "adaptive",
+        "chromeapp",
+        "browser",
         "flutter"
     ],
     "devdriver": "browser",
