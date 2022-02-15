@@ -12,7 +12,7 @@ This is still a prototype
 npm install
 npm run dev
 ```
-6. Open a browser for the displayed URL. (`http://localhost:42635`)
+6. Open a browser for the displayed URL. (`http://localhost:42xxx`)
 7. To open it as a normal app window, change property `devdriver` to `chromeapp` in file `SpindlyConfigs.json`
 
 #### To build packages for Linux, Windows and Mac : 
