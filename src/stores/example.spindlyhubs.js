@@ -9,7 +9,7 @@ export function ExampleHub(hub_instance_id) {
         return () => { es.set(Math.random()); };
     };
     return {
-        Message: SpindlyStore("Message"),
+        Name: SpindlyStore("Name"),
         Greating: SpindlyStore("Greating"),
     }
 }

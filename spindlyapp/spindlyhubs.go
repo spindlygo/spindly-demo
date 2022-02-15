@@ -7,9 +7,9 @@ var HubManager *Spindly.HubManager = Spindly.NewHubManager()
 type GlobalHub struct {
 	Instance     *Spindly.HubInstance
 	AppName      Spindly.SpindlyStore
-	Version      Spindly.SpindlyStore
 	SaidHello    Spindly.SpindlyStore
 	HelloMessage Spindly.SpindlyStore
+	Events       Spindly.SpindlyStore
 }
 
 var GlobalHub_OnInstanciate func(*GlobalHub)
@@ -33,18 +33,9 @@ func (hub *GlobalHub) Instanciate(InstanceID string) *Spindly.HubInstance {
 		func() interface{} {
 			return ``
 		},
-		`Spindly Sample App`,
+		`Spindly`,
 	)
 	hub.Instance.Register(&hub.AppName)
-
-	hub.Version = Spindly.NewSpindlyStore(
-		"Version",
-		func() interface{} {
-			return ""
-		},
-		nil,
-	)
-	hub.Instance.Register(&hub.Version)
 
 	hub.SaidHello = Spindly.NewSpindlyStore(
 		"SaidHello",
@@ -64,6 +55,15 @@ func (hub *GlobalHub) Instanciate(InstanceID string) *Spindly.HubInstance {
 	)
 	hub.Instance.Register(&hub.HelloMessage)
 
+	hub.Events = Spindly.NewSpindlyStore(
+		"Events",
+		func() interface{} {
+			return []interface{}{}
+		},
+		[]interface{}{},
+	)
+	hub.Instance.Register(&hub.Events)
+
 	HubManager.Register(hub.Instance)
 	if GlobalHub_OnInstanciate != nil {
 		go GlobalHub_OnInstanciate(hub)
@@ -74,14 +74,14 @@ func (hub *GlobalHub) Instanciate(InstanceID string) *Spindly.HubInstance {
 func (hub *GlobalHub) GetAppName() string {
 	return hub.AppName.Get().(string)
 }
-func (hub *GlobalHub) GetVersion() string {
-	return hub.Version.Get().(string)
-}
 func (hub *GlobalHub) GetSaidHello() float64 {
 	return hub.SaidHello.Get().(float64)
 }
 func (hub *GlobalHub) GetHelloMessage() string {
 	return hub.HelloMessage.Get().(string)
+}
+func (hub *GlobalHub) GetEvents() []interface{} {
+	return hub.Events.Get().([]interface{})
 }
 
 type ClockHub struct {
@@ -138,7 +138,7 @@ func (hub *ClockHub) GetTimeZone() string {
 
 type ExampleHub struct {
 	Instance *Spindly.HubInstance
-	Message  Spindly.SpindlyStore
+	Name     Spindly.SpindlyStore
 	Greating Spindly.SpindlyStore
 }
 
@@ -156,21 +156,21 @@ func (hub *ExampleHub) Instanciate(InstanceID string) *Spindly.HubInstance {
 		Stores:     make(map[string]*Spindly.SpindlyStore),
 	}
 
-	hub.Message = Spindly.NewSpindlyStore(
-		"Message",
+	hub.Name = Spindly.NewSpindlyStore(
+		"Name",
 		func() interface{} {
 			return ""
 		},
 		nil,
 	)
-	hub.Instance.Register(&hub.Message)
+	hub.Instance.Register(&hub.Name)
 
 	hub.Greating = Spindly.NewSpindlyStore(
 		"Greating",
 		func() interface{} {
 			return ""
 		},
-		`Hello there!`,
+		nil,
 	)
 	hub.Instance.Register(&hub.Greating)
 
@@ -181,8 +181,8 @@ func (hub *ExampleHub) Instanciate(InstanceID string) *Spindly.HubInstance {
 	return hub.Instance
 }
 
-func (hub *ExampleHub) GetMessage() string {
-	return hub.Message.Get().(string)
+func (hub *ExampleHub) GetName() string {
+	return hub.Name.Get().(string)
 }
 func (hub *ExampleHub) GetGreating() string {
 	return hub.Greating.Get().(string)

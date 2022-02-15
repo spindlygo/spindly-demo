@@ -5,16 +5,18 @@
             "AppName": {
                 "type": "string",
                 "template": "``",
-                "default": "Spindly Sample App"
-            },
-            "Version": {
-                "type": "string"
+                "default": "Spindly"
             },
             "SaidHello": {
                 "type": "event"
             },
             "HelloMessage": {
                 "type": "string"
+            },
+            "Events": {
+                "type": "[]interface{}",
+                "template": "[]interface{}{}",
+                "default": "[]interface{}{}"
             }
         },
         "instances": [
@@ -36,12 +38,11 @@
     "ExampleHub": {
         "filepath": "stores/example",
         "stores": {
-            "Message": {
+            "Name": {
                 "type": "string"
             },
             "Greating": {
-                "type": "string",
-                "default": "Hello there!"
+                "type": "string"
             }
         }
     }

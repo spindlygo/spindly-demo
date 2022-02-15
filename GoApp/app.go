@@ -1,6 +1,7 @@
 package GoApp
 
 import (
+	"strconv"
 	"strings"
 	"time"
 
@@ -11,6 +12,8 @@ func Main() {
 
 	println(" --- Spindly Server --- ")
 
+	spindlyapp.DefaultPort = "43216"
+
 	// Set OnInstanciate methods before anything is instantiated
 	spindlyapp.ClockHub_OnInstanciate = StartClock
 	spindlyapp.ExampleHub_OnInstanciate = ExampleHub_OnInstanciate
@@ -20,23 +23,49 @@ func Main() {
 
 	// You can access Hubs now
 	println(spindlyapp.Global.GetAppName())
+	spindlyapp.Global.HelloMessage.Set("Hello there, this messege is set from Go code!")
+
+	// Handle an event. Here we are responding to the "SaidHello" event
 	spindlyapp.Global.SaidHello.OnChange(SaidHello)
 
 	// Start serving the UI. This will block until the server is stopped.
 	spindlyapp.Serve()
+
 }
 
 func SaidHello(interface{}) {
+	// This function is called everytime when the value of the SaidHello event occurs
 	spindlyapp.Global.HelloMessage.Set("Hello there, it's " + time.Now().Format("15:04:05") + " now. You are right on time!")
+
+	events := spindlyapp.Global.GetEvents()
+	events = append(events, "Said hello at "+time.Now().Format("15:04:05"))
+	if len(events) > 5 {
+		events = events[1:]
+	}
+
+	spindlyapp.Global.Events.Set(events)
 }
 
 func ExampleHub_OnInstanciate(hub *spindlyapp.ExampleHub) {
-	hub.Message.OnChange(
+
+	// Set a default value
+	hub.Greating.Set("Hello from Go!")
+
+	hub.Name.OnChange(
+		// This function is called everytime when the value of the Name property changes
 		func(newValue interface{}) {
 
 			var name = newValue.(string)
 			println("Message changed to: " + name)
-			hub.Greating.Set("Hello " + strings.Title(name) + ", Let's play with Spindly")
+
+			// Just for fun, we are going to change the greeting message
+			if len(name) > 0 {
+				num := (len(name)*11)%20 + 20
+				hub.Greating.Set("Nice name '" + strings.Title(name) + "', your magic number is " + strconv.Itoa(num))
+			} else {
+				hub.Greating.Set("Can you tell me your name?")
+			}
+
 		},
 	)
 }

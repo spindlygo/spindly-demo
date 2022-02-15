@@ -7,4 +7,4 @@ require (
 	github.com/spindlygo/spindly v1.0.25
 )
 
-require github.com/gorilla/websocket v1.4.2 // indirect
+require github.com/gorilla/websocket v1.5.0 // indirect

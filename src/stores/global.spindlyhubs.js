@@ -10,9 +10,9 @@ export function GlobalHub(hub_instance_id) {
     };
     return {
         AppName: SpindlyStore("AppName"),
-        Version: SpindlyStore("Version"),
         SaidHello: SpindlyEventStore("SaidHello"),
         HelloMessage: SpindlyStore("HelloMessage"),
+        Events: SpindlyStore("Events"),
     }
 }
 
