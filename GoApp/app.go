@@ -8,22 +8,21 @@ import (
 	"github.com/spindlygo/spindly-demo/spindlyapp"
 )
 
-var cwd string
+const defaultServerPort = "43216"
 
-const serverPort = "43216"
+// Step 1 : onInitialize is called before anything is initialized
+func onInitialize() {
 
-func configure() {
-
-	println(" --- Configure Spindly --- ")
-
-	spindlyapp.DefaultPort = serverPort
+	spindlyapp.DefaultPort = defaultServerPort
 
 	// Set OnInstanciate methods before anything is instantiated
 	spindlyapp.ClockHub_OnInstanciate = startClock
 	spindlyapp.ExampleHub_OnInstanciate = exampleHub_OnInstanciate
 
-	// Configure Hubs and Server Routes
-	spindlyapp.Configure()
+}
+
+// Step 2 : onConfigure is called after host is configured, but before the server is started
+func onConfigure() {
 
 	// You can access Hubs now
 	println(spindlyapp.Global.GetAppName())
@@ -35,11 +34,13 @@ func configure() {
 
 }
 
-func runServer() {
-	println(" --- Start Spindly Server --- ")
+// Step 3 : onServerStart is called after the server is started
+func onServerStart() {
 
-	// Start serving the UI. This will block until the server is stopped.
-	spindlyapp.Serve()
+}
+
+// Step 4 : onExit is called after the server is stopped
+func onExit() {
 
 }
 
