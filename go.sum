@@ -3,5 +3,7 @@ github.com/gorilla/mux v1.8.0/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB7
 github.com/gorilla/websocket v1.4.2/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
 github.com/gorilla/websocket v1.5.0 h1:PPwGk2jz7EePpoHN/+ClbZu8SPxiqlu12wZP/3sWmnc=
 github.com/gorilla/websocket v1.5.0/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
-github.com/spindlygo/spindly v1.0.25 h1:/gfWNp2lFZlo3URUypzJMcezXsnMSsmpfhKEb4HSRi8=
-github.com/spindlygo/spindly v1.0.25/go.mod h1:qbIxEC4pivK4ryVEs0Kuk1cXvgH54Z+zWUx050HX0S8=
+github.com/spindlygo/SpindlyExports v0.1.5 h1:3BHOpG43aS1WZvmKV2rgHR3sKGw0KXeSxPVR4/aWlck=
+github.com/spindlygo/SpindlyExports v0.1.5/go.mod h1:9zdwipdQdoGwgRdd27Zj21AYAju44E/GkLHiMjg07rY=
+github.com/spindlygo/spindly v1.0.28 h1:SV3d6G6ysb/FL+ivIz6XwKYBihIscvreTpqkzy7LZT4=
+github.com/spindlygo/spindly v1.0.28/go.mod h1:HeGKqedMkazCOaNHvfWy0PnPm/fryPn7y0dLK2cMgOA=

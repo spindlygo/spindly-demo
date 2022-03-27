@@ -1,6 +1,11 @@
 package spindlyapp
 
-import "github.com/spindlygo/spindly/Spindly"
+import (
+	"time"
+
+	"github.com/spindlygo/SpindlyExports"
+	"github.com/spindlygo/spindly/Spindly"
+)
 
 var HubManager *Spindly.HubManager = Spindly.NewHubManager()
 
@@ -13,6 +18,22 @@ type GlobalHub struct {
 }
 
 var GlobalHub_OnInstanciate func(*GlobalHub)
+
+type GlobalHubExported struct {
+	AppName      *SpindlyExports.ExportedStore
+	SaidHello    *SpindlyExports.ExportedStore
+	HelloMessage *SpindlyExports.ExportedStore
+	Events       *SpindlyExports.ExportedStore
+}
+
+func (hub *GlobalHub) ToExported() *GlobalHubExported {
+	return &GlobalHubExported{
+		AppName:      hub.AppName.ToExported(),
+		SaidHello:    hub.SaidHello.ToExported(),
+		HelloMessage: hub.HelloMessage.ToExported(),
+		Events:       hub.Events.ToExported(),
+	}
+}
 
 var Global *GlobalHub
 
@@ -92,6 +113,18 @@ type ClockHub struct {
 
 var ClockHub_OnInstanciate func(*ClockHub)
 
+type ClockHubExported struct {
+	ClockFace *SpindlyExports.ExportedStore
+	TimeZone  *SpindlyExports.ExportedStore
+}
+
+func (hub *ClockHub) ToExported() *ClockHubExported {
+	return &ClockHubExported{
+		ClockFace: hub.ClockFace.ToExported(),
+		TimeZone:  hub.TimeZone.ToExported(),
+	}
+}
+
 func (hub ClockHub) New(InstanceID string) *ClockHub {
 	hub.Instanciate(InstanceID)
 	return &hub
@@ -144,6 +177,18 @@ type ExampleHub struct {
 
 var ExampleHub_OnInstanciate func(*ExampleHub)
 
+type ExampleHubExported struct {
+	Name     *SpindlyExports.ExportedStore
+	Greating *SpindlyExports.ExportedStore
+}
+
+func (hub *ExampleHub) ToExported() *ExampleHubExported {
+	return &ExampleHubExported{
+		Name:     hub.Name.ToExported(),
+		Greating: hub.Greating.ToExported(),
+	}
+}
+
 func (hub ExampleHub) New(InstanceID string) *ExampleHub {
 	hub.Instanciate(InstanceID)
 	return &hub
@@ -193,4 +238,22 @@ func InitializeHubs() {
 	Global = GlobalHub{}.New("Global")
 	HubManager.RegisterClass("ClockHub", func() Spindly.HubClass { return &ClockHub{} })
 	HubManager.RegisterClass("ExampleHub", func() Spindly.HubClass { return &ExampleHub{} })
+	namedExports = &NamedExportedHubs{
+		Global: Global.ToExported(),
+	}
+}
+
+type NamedExportedHubs struct {
+	Global *GlobalHubExported
+}
+
+var namedExports *NamedExportedHubs = nil
+
+func NamedExports() *NamedExportedHubs {
+	for namedExports == nil {
+		println("Waiting for NamedExports")
+		time.Sleep(100 * time.Millisecond)
+	}
+
+	return namedExports
 }

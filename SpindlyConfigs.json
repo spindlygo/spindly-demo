@@ -4,7 +4,7 @@
         "adaptive",
         "chromeapp",
         "browser",
-        "flutter"
+        "mobile"
     ],
     "devdriver": "browser",
     "os": [

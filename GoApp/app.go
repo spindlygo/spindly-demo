@@ -8,32 +8,42 @@ import (
 	"github.com/spindlygo/spindly-demo/spindlyapp"
 )
 
-func Main() {
+var cwd string
 
-	println(" --- Spindly Server --- ")
+const serverPort = "43216"
 
-	spindlyapp.DefaultPort = "43216"
+func configure() {
+
+	println(" --- Configure Spindly --- ")
+
+	spindlyapp.DefaultPort = serverPort
 
 	// Set OnInstanciate methods before anything is instantiated
-	spindlyapp.ClockHub_OnInstanciate = StartClock
-	spindlyapp.ExampleHub_OnInstanciate = ExampleHub_OnInstanciate
+	spindlyapp.ClockHub_OnInstanciate = startClock
+	spindlyapp.ExampleHub_OnInstanciate = exampleHub_OnInstanciate
 
 	// Configure Hubs and Server Routes
 	spindlyapp.Configure()
 
 	// You can access Hubs now
 	println(spindlyapp.Global.GetAppName())
-	spindlyapp.Global.HelloMessage.Set("Hello there, this messege is set from Go code!")
+	spindlyapp.Global.AppName.Set("Spindly Demo App")
+	spindlyapp.Global.HelloMessage.Set("Hello there, this message is set from Go code!")
 
 	// Handle an event. Here we are responding to the "SaidHello" event
-	spindlyapp.Global.SaidHello.OnChange(SaidHello)
+	spindlyapp.Global.SaidHello.OnChange(saidHello)
+
+}
+
+func runServer() {
+	println(" --- Start Spindly Server --- ")
 
 	// Start serving the UI. This will block until the server is stopped.
 	spindlyapp.Serve()
 
 }
 
-func SaidHello(interface{}) {
+func saidHello(interface{}) {
 	// This function is called everytime when the value of the SaidHello event occurs
 	spindlyapp.Global.HelloMessage.Set("Hello there, it's " + time.Now().Format("15:04:05") + " now. You are right on time!")
 
@@ -46,7 +56,7 @@ func SaidHello(interface{}) {
 	spindlyapp.Global.Events.Set(events)
 }
 
-func ExampleHub_OnInstanciate(hub *spindlyapp.ExampleHub) {
+func exampleHub_OnInstanciate(hub *spindlyapp.ExampleHub) {
 
 	// Set a default value
 	hub.Greating.Set("Hello from Go!")
@@ -70,25 +80,25 @@ func ExampleHub_OnInstanciate(hub *spindlyapp.ExampleHub) {
 	)
 }
 
-func StartClock(clock *spindlyapp.ClockHub) {
+func startClock(clock *spindlyapp.ClockHub) {
 	// Create a timer to run every second
 	timer := time.NewTicker(time.Second)
 
 	// This loop executes every second
 	for range timer.C {
 		// Get the current time in clocks time zone
-		displayTime := TimeIn(time.Now().UTC(), clock.GetTimeZone())
+		displayTime := timeIn(time.Now().UTC(), clock.GetTimeZone())
 
 		// Set the spindly store value, this will be immediately synched with the correspoinding svelte store
 		clock.ClockFace.Set(displayTime.Format("15:04:05"))
 	}
 }
 
-// TimeIn returns the time in UTC if the name is "" or "UTC".
+// timeIn returns the time in UTC if the name is "" or "UTC".
 // It returns the local time if the name is "Local".
 // Otherwise, the name is taken to be a location name in
 // the IANA Time Zone database, such as "Africa/Lagos".
-func TimeIn(t time.Time, name string) time.Time {
+func timeIn(t time.Time, name string) time.Time {
 	loc, err := time.LoadLocation(name)
 	if err == nil {
 		return t.In(loc)
