@@ -5,5 +5,5 @@ github.com/gorilla/websocket v1.5.0 h1:PPwGk2jz7EePpoHN/+ClbZu8SPxiqlu12wZP/3sWm
 github.com/gorilla/websocket v1.5.0/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
 github.com/spindlygo/SpindlyExports v0.1.5 h1:3BHOpG43aS1WZvmKV2rgHR3sKGw0KXeSxPVR4/aWlck=
 github.com/spindlygo/SpindlyExports v0.1.5/go.mod h1:9zdwipdQdoGwgRdd27Zj21AYAju44E/GkLHiMjg07rY=
-github.com/spindlygo/spindly v1.0.28 h1:SV3d6G6ysb/FL+ivIz6XwKYBihIscvreTpqkzy7LZT4=
-github.com/spindlygo/spindly v1.0.28/go.mod h1:HeGKqedMkazCOaNHvfWy0PnPm/fryPn7y0dLK2cMgOA=
+github.com/spindlygo/spindly v1.0.29 h1:CuYZyj0fQi7PlOJExQl/Onk0le/rS1L6r6iNjieIiWg=
+github.com/spindlygo/spindly v1.0.29/go.mod h1:HeGKqedMkazCOaNHvfWy0PnPm/fryPn7y0dLK2cMgOA=
