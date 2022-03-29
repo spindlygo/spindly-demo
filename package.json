@@ -3,18 +3,22 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "rollup -c && node ./node_modules/spindly/spindly-publish.js",
+    "build": "rollup -c && cross-env-shell node ./node_modules/spindly/spindly-publish.js",
+    "mobile": "cross-env SPINDLYBUILD=MOBILE npm run build",
+    "webonly": "cross-env PARTIALBUILD=WEBAPP npm run build",
+    "mobile-webonly": "cross-env SPINDLYBUILD=MOBILE PARTIALBUILD=WEBAPP npm run build",
     "dev": "rollup -c -w"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
+    "cross-env": "^7.0.3",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-svelte": "^7.0.0",
     "rollup-plugin-terser": "^7.0.0",
-    "spindly": "^1.0.31",
+    "spindly": "^1.0.32",
     "svelte": "^3.0.0"
   },
   "dependencies": {
