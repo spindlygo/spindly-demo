@@ -72,7 +72,7 @@ func exampleHub_OnInstanciate(hub *spindlyapp.ExampleHub) {
 			// Just for fun, we are going to change the greeting message
 			if len(name) > 0 {
 				num := (len(name)*11)%20 + 20
-				hub.Greating.Set("Nice name '" + strings.Title(name) + "', your magic number is " + strconv.Itoa(num))
+				hub.Greating.Set("Nice name '" + strings.ToTitle(name) + "', your magic number is " + strconv.Itoa(num))
 			} else {
 				hub.Greating.Set("Can you tell me your name?")
 			}
