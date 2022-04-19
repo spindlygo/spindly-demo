@@ -23,6 +23,6 @@
   },
   "dependencies": {
     "sirv-cli": "^1.0.0",
-    "spindly-hubs": "^1.0.2"
+    "spindly-hubs": "^1.0.3"
   }
 }

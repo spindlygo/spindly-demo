@@ -3,6 +3,8 @@
   import { ExampleHub } from "./stores/example.spindlyhubs.js";
   import Clock from "./Clock.svelte";
 
+  import { IsHostAlive } from "spindly-hubs";
+
   let NameJS = "";
   let GreatingJS = "";
 
@@ -21,6 +23,25 @@
   if (!$Events) {
     $Events = ["Hi"];
   }
+
+  let deadHostTimout = null;
+  IsHostAlive.subscribe((alive) => {
+    if (alive) {
+      if (deadHostTimout) {
+        clearTimeout(deadHostTimout);
+        deadHostTimout = null;
+      }
+    } else {
+      if (!deadHostTimout) {
+        deadHostTimout = setTimeout(() => {
+          clearTimeout(deadHostTimout);
+          deadHostTimout = null;
+          window.stop();
+          window.close();
+        }, 6500);
+      }
+    }
+  });
 </script>
 
 <div>
@@ -29,66 +50,78 @@
     <h3>Write once, run anywhere app framework for desktop and mobile</h3>
   </div>
 
-  <div style="display: flex; flex-wrap: wrap; margin: 5vw; ">
-    <div class="half box">
-      <h3>This logic is written in JavaScript</h3>
+  {#if $IsHostAlive}
+    <div style="display: flex; flex-wrap: wrap; margin: 5vw; ">
+      <div class="half box">
+        <h3>This logic is written in JavaScript</h3>
 
-      <input
-        type="text"
-        bind:value={NameJS}
-        placeholder="Type your name here"
-      />
-      <p class="store">{GreatingJS}</p>
-    </div>
-
-    <div class="half box">
-      <h3>This logic is written in Go</h3>
-
-      <input type="text" bind:value={$Name} placeholder="Type your name here" />
-      <p class="store">{$Greating}</p>
-    </div>
-
-    <div class="half box">
-      <h3>This is a pre-defined instance store</h3>
-      <p>Go can access these directly by the variable name</p>
-      <p class="store">{$HelloMessage}</p>
-      <input type="button" value="Say hello" on:click={SaidHello} />
-
-      <p>
-        A store can hold any type of value that a JSON can represent. Here we
-        are storing an array
-      </p>
-      <div>
-        {#each $Events as event}
-          <p class="store">{event}</p>
-        {/each}
-      </div>
-    </div>
-
-    <div class="half box">
-      <h3>These clocks are running in Go host</h3>
-      <p>This demonstraits how simple it is to update the UI and respond</p>
-
-      <div style="display: flex; flex-wrap: wrap; margin: 1vw; ">
-        <Clock />
-        <Clock Zone="UTC" />
-        <Clock Zone="Europe/Paris" />
-        <Clock Zone="Asia/Singapore" />
+        <input
+          type="text"
+          bind:value={NameJS}
+          placeholder="Type your name here"
+        />
+        <p class="store">{GreatingJS}</p>
       </div>
 
-      <p>
-        Each clock has its own instance of a 'ClockHub'. Each holds its state
-        and respond independently.
-      </p>
-    </div>
+      <div class="half box">
+        <h3>This logic is written in Go</h3>
 
-    <div style="margin-left: auto; margin-right: auto; text-align: center;">
-      <p>
-        It took less than 30 JavaScript code lines and less than 50 executable
-        Go code lines to create this sample project
-      </p>
+        <input
+          type="text"
+          bind:value={$Name}
+          placeholder="Type your name here"
+        />
+        <p class="store">{$Greating}</p>
+      </div>
+
+      <div class="half box">
+        <h3>This is a pre-defined instance store</h3>
+        <p>Go can access these directly by the variable name</p>
+        <p class="store">{$HelloMessage}</p>
+        <input type="button" value="Say hello" on:click={SaidHello} />
+
+        <p>
+          A store can hold any type of value that a JSON can represent. Here we
+          are storing an array
+        </p>
+        <div>
+          {#each $Events as event}
+            <p class="store">{event}</p>
+          {/each}
+        </div>
+      </div>
+
+      <div class="half box">
+        <h3>These clocks are running in Go host</h3>
+        <p>This demonstraits how simple it is to update the UI and respond</p>
+
+        <div style="display: flex; flex-wrap: wrap; margin: 1vw; ">
+          <Clock />
+          <Clock Zone="UTC" />
+          <Clock Zone="Europe/Paris" />
+          <Clock Zone="Asia/Singapore" />
+        </div>
+
+        <p>
+          Each clock has its own instance of a 'ClockHub'. Each holds its state
+          and respond independently.
+        </p>
+      </div>
+
+      <div style="margin-left: auto; margin-right: auto; text-align: center;">
+        <p>
+          It took less than 30 JavaScript code lines and less than 50 executable
+          Go code lines to create this sample project
+        </p>
+      </div>
     </div>
-  </div>
+  {:else}
+    <div style="display: flex; flex-wrap: wrap; margin: 5vw; ">
+      <div class="half box">
+        <h3>Host is not responding. Try restarting the app.</h3>
+      </div>
+    </div>
+  {/if}
 </div>
 
 <style>
