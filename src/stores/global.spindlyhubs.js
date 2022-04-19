@@ -2,8 +2,8 @@ import { ConnectHub } from "spindly-hubs";
 
 const hub_name = 'GlobalHub';
 
-export function GlobalHub(hub_instance_id) {
-    let SpindlyStore = ConnectHub(hub_name, hub_instance_id);
+export function GlobalHub(hub_instance_id, preserve = false) {
+    let SpindlyStore = ConnectHub(hub_name, hub_instance_id, preserve);
     let SpindlyEventStore = (storename) => {
         let es = SpindlyStore(storename);
         return () => { es.set(Math.random()); };
@@ -16,4 +16,4 @@ export function GlobalHub(hub_instance_id) {
     }
 }
 
-export let Global = GlobalHub("Global");
+export let Global = GlobalHub("Global", true);
