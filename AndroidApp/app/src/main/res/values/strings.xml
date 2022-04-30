@@ -6,7 +6,7 @@
             \"relation\": [\"delegate_permission/common.handle_all_urls\"],
             \"target\": {
                 \"namespace\": \"web\",
-                \"site\": \"http://localhost:43216\"}
+                \"site\": \"http://localhost:43217\"}
         }]
     </string>
 </resources>

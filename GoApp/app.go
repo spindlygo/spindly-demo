@@ -8,7 +8,7 @@ import (
 	"github.com/spindlygo/spindly-demo/spindlyapp"
 )
 
-const defaultServerPort = "43216"
+const defaultServerPort = "43217"
 
 // Step 1 : onInitialize is called before anything is initialized
 func onInitialize() {
